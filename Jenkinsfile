@@ -19,17 +19,17 @@ node {
                       
                       // Modify Django Deployment file with the new version "taken from the CI pipeline" 
                         sh "echo 'Modifying Django Deployment'"                     
-                        sh "cat app/Django-deployment.yaml"
-                        sh "sh django_app_version_update app/Django-deployment.yaml"
+                        sh "cat app/Django-deployment.yml"
+                        sh "sh django_app_version_update app/Django-deployment.yml"
                         sh "echo $GIT_COMMIT_REV"
-                        sh "cat app/Django-deployment.yaml"
+                        sh "cat app/Django-deployment.yml"
 
                       // Modify React Deployment file with the new version "taken from the CI pipeline" 
                         sh "echo 'Modifying React Deployment'"                     
-                        sh "cat app/React-deployment.yaml"
-                        sh "sh react_app_version_update app/React-deployment.yaml"
+                        sh "cat app/React-deployment.yml"
+                        sh "sh react_app_version_update app/React-deployment.yml"
                         sh "echo $GIT_COMMIT_REV"
-                        sh "cat app/React-deployment.yaml"
+                        sh "cat app/React-deployment.yml"
 
                       // MOdify the CD Repo with the new app  
                         sh "git add *"
