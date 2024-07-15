@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-nginx-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: react-nginx
+  template:
+    metadata:
+      labels:
+        app: react-nginx
+    spec:
+      containers:
+      - name: react-nginx-cont
+        image: ahmedatiia11/react-nginx-img:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
