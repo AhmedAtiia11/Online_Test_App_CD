@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: react-nginx-cont
-        image: ahmedatiia11/react-nginx-img:adc268d
+        image: ahmedatiia11/react-nginx-img:18de7bf
         resources:
           limits:
             memory: "128Mi"
