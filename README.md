@@ -18,6 +18,9 @@ The CD repository on GitHub is updated with the latest changes, maintaining vers
 ### Step 4: ArgoCD Deployment
 ArgoCD is triggered automatically to deploy the application by running the `Application.yaml` file from this repository.
 
+### Step 5: Monitor Node
+Monitor the node running Application .
+
 ## How it Works
 
 1. **Connection-Test-App-CD Jenkinsfile**:
@@ -45,4 +48,29 @@ ArgoCD is triggered automatically to deploy the application by running the `Appl
 
 5. **Accessing the Application**:
    - Once deployed, access the application at [http://localhost:30003/](http://localhost:30003/) to verify it is running online.
+
+
+4. **Monitor Node**
+   - To monitor Node We use Prometheus and Grafana using Helm
+   Run the Following commmands
+    ```sh
+    helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+    helm repo add grafana https://grafana.github.io/helm-charts
+    helm repo update
+    helm install prometheus prometheus-community/prometheus
+    kubectl edit svc prometheus-server >> make it's type NodePort on 30002
+    helm install grafana grafana/grafana
+    kubectl edit svc grafana >> make it's type NodePort on 30001
+    ngrok http http://localhost:30002
+    ```
+5. **Access the Monitor Dashboard**
+
+    ```sh
+    http:localhost:30001
+    username: admin
+    password: `kubectl get secret grafana -o jsonpath='{.data.admin-password}'| base64 --decode`
+    add data source >> prometheus >> copy prometheus URL from Ngrok
+    import dashboard ID = 1860
+
+    ```    
 
